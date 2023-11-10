@@ -1,0 +1,4 @@
+curl -X POST http://localhost:11434/api/generate -d '{
+  "model": "mistral",
+  "prompt":"What is Groovy in 10 words?"
+ }'

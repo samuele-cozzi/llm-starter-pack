@@ -14,10 +14,20 @@ spec:
     spec:
       containers:
         - name: ollama
-          image: onlydole/ollama-mistral:latest
+          image: ollama/ollama:latest
+          volumeMounts:
+            - mountPath: /root/.ollama
+              name: ollama-data
           ports:
             - containerPort: 11434
       initContainers:
         - name: ollama-init
-          image: onlydole/ollama-mistral:latest
-          command: ["sh", "-c", "ollama serve & ollama pull mistral"]
+          image: ollama/ollama:latest
+          command: ["sh", "-c", "ollama serve & sleep 30 && ollama pull mistral"]
+          volumeMounts:
+            - mountPath: /root/.ollama
+              name: ollama-data
+      volumes:
+        - name: ollama-data
+          emptyDir:
+            sizeLimit: 8Gi
