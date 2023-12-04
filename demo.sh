@@ -16,7 +16,7 @@ while [[ $(kubectl get pods --no-headers | grep 'bot' | awk '{print $3}') != "Ru
 done
 
 echo "Forwarding the Ollama pod..."
-kubectl kubectl port-forward service/ollama 11434:11434 &
+kubectl port-forward service/ollama 11434:11434 &
 
 echo "Forwarding the Chat Bot pod..."
 kubectl port-forward svc/bot 8501:8501 &
